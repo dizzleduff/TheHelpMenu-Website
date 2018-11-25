@@ -72,6 +72,10 @@ height: 100%;
       margin: 50px;
     }
 
+    .myContainer {
+
+    }
+
     p {
       font-family: "Georgia, serif";
     }
@@ -104,7 +108,7 @@ height: 100%;
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-         <a class="navbar-brand" href="HMHome.html"><img src="gameLogo.png" style="width: 70%;"></a>
+        <a class="navbar-brand" href="HMHome.html"><img src="gameLogo.png" style="width: 70%;"></a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -117,10 +121,9 @@ height: 100%;
   </nav>
   </div>
 
-  <p align="right" style="padding: 25px;">Filter list: <input ng-model="searchFor" size="30"/></p>
+  <p align="right" style="padding: 25px;">Filter list: <input ng-model="searchFor" size="30" /></p>
 
-    <div ng-repeat="article in articles | filter:searchFor | orderBy: '-date'"
-         class="recipe panel panel-default">
+  <div ng-repeat="article in articles | filter:searchFor | orderBy: '-date'" class="recipe panel panel-default">
     <div class="panel-heading"> {{ article.title }}</div>
     <div class="panel-body">
       {{ article.summary }}
@@ -129,51 +132,58 @@ height: 100%;
   </div>
   <div style="clear: left"></div>
 
-<div class="myContainer">
-  <form class="col-md-6" style="border:thin solid black ">
-    <h3 class="mt-5">Add New Recipe</h3>
+  <input id="clickMe" type="button" value="clickme" onclick="showForm();" />
 
-    <div class="form-row mb-4">
-      <input type="text" placeholder="Article Title ..." ng-model="new_article.title" />
-      <input type="text" placeholder="Article Date ..." ng-model="new_article.date" style="margin:10 0 10 0;"/>
-      <input type="text" placeholder="Article Author ..." ng-model="new_article.author" />
-    </div>
-    <div class="row mt-4">
-      <textarea ng-model="new_article.summary" placeholder="Summary ..." rows='4' style="width : 100%"></textarea>
-      <button ng-click="addArticle(new_article)" type="button" class="btn btn-primary mt-5"> Save Recipe </button>
+  <div class="myContainer" id="pressOnly">
+    <form class="col-md-6" style="border:#DDDDDD; margin: 25px; background-color: #F5F5F5; padding: 10px;">
+      <h3>Add New Recipe</h3>
 
-    </div>
-  </form>
-</div>
+      <div class="form-row">
+        <input type="text" placeholder="Article Title ..." ng-model="new_article.title" />
+        <input type="text" placeholder="Article Date ..." ng-model="new_article.date" />
+        <input type="text" placeholder="Article Author ..." ng-model="new_article.author" />
+      </div>
+      <hr>
+        <textarea ng-model="new_article.summary" placeholder="Summary ..." rows='4' style="width:100%" maxlength="400" minlength="10" required></textarea>
+        <button ng-click="addArticle(new_article)" type="submit" class="btn btn-primary mt-5">Save Recipe</button>
+    </form>
+  </div>
 
-<script type="text/javascript">
+  <script type="text/javascript">
     // 1. create the module / app, make sure ng-app points to it.
     var newsApp = angular.module('newsApp', []);
     // 2. create the controller and give it $scope.
     newsApp.controller("newsController", ['$scope', function($scope) {
-        $scope.new_article = { };
-        $scope.articles = [
-            { title: 'Pasta al Pesto',
-              date: '12/28/2018',
-              author: 'Bette Davis',
-              summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas sed. Id diam vel quam elementum pulvinar. A pellentesque sit amet porttitor. Orci sagittis eu volutpat odio facilisis mauris. Non arcu risus quis varius quam quisque id diam vel. Non arcu risus quis varius quam quisque id diam.' },
-            { title: 'Garlic Pork',
-              date: '12/5/2018',
-              author: 'Lawerence Oliver',
-              summary: 'A quick and simple meat dish for any Thai table.' },
-            { title: 'Garlic Broccoli',
-              date: '5/24/2019',
-              author: 'Carlos Carlos Carlos',
-              summary: 'Healthy and full of flavour, a simple dish.' },
-            { title: 'Black Pepper Beef',
-              date: '7/4/2019',
-              author: 'Cecil Baldwin',
-              summary: 'Delicious and rich in flavour. A Chinese classic.' }
-        ];
-		$scope.addArticle = function(article){
-			$scope.articles.push(article);
-			$scope.new_article = "";
-		}
+      $scope.new_article = {};
+      $scope.articles = [{
+          title: 'Pasta al Pesto',
+          date: '12/28/2018',
+          author: 'Bette Davis',
+          summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas sed. Id diam vel quam elementum pulvinar. A pellentesque sit amet porttitor. Orci sagittis eu volutpat odio facilisis mauris. Non arcu risus quis varius quam quisque id diam vel. Non arcu risus quis varius quam quisque id diam.'
+        },
+        {
+          title: 'Garlic Pork',
+          date: '12/5/2018',
+          author: 'Lawerence Oliver',
+          summary: 'A quick and simple meat dish for any Thai table.'
+        },
+        {
+          title: 'Garlic Broccoli',
+          date: '5/24/2019',
+          author: 'Carlos Carlos Carlos',
+          summary: 'Healthy and full of flavour, a simple dish.'
+        },
+        {
+          title: 'Black Pepper Beef',
+          date: '7/4/2019',
+          author: 'Cecil Baldwin',
+          summary: 'Delicious and rich in flavour. A Chinese classic.'
+        }
+      ];
+      $scope.addArticle = function(article) {
+        $scope.articles.push(article);
+        $scope.new_article = "";
+      }
 
     }]);
 
@@ -192,13 +202,18 @@ height: 100%;
       return (monthIndex + 1) + '/' + day + '/' + year;
     }
 
-    console.log(formatDate(new Date()));
+    //console.log(formatDate(new Date()));
 
-</script>
+    document.getElementById("pressOnly").style.visibility = "hidden";
 
-<footer class="container-fluid text-center">
-  <p>© <strong>The Help Menu</strong></p>
-</footer>
+    function showForm() {
+      document.getElementById("pressOnly").style.visibility = "visible";
+    }
+  </script>
+
+  <footer class="container-fluid text-center">
+    <p>© <strong>The Help Menu</strong></p>
+  </footer>
 
 </body>
 

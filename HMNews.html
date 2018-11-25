@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="newsApp">
+<!-- Julianna Shevchenko and Eamon Duffy-->
+
+<head>
+  <title>The Help Menu</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script type='text/javascript' src="angular.min.js"></script>
+
+  <style>
+
+    .navbar, .navbar-inverse {
+border-radius: 0;
+border: none;
+margin-bottom: 0;
+min-height: 80px;
+}
+
+.nav li {
+display: inline;
+color: white;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+color: #ffffff;
+font-family: Lato;
+font-size: 1.7em;
+font-weight: 300;
+padding: 30px 25px 33px 25px;
+}
+
+.navbar-inverse .navbar-nav li a:hover {
+background-color: #444444;
+transition: 0.7s all linear;
+height: 100%;
+}
+
+.card {
+  margin: 15px;
+  padding: 15px;
+}
+
+    .responsive {
+      width:100%
+      height:auto;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+    }
+
+    .carousel-inner img {
+      width:780px;
+      height:440px;
+      margin: auto;
+    }
+
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+
+    .panel {
+      margin: 50px;
+    }
+
+    p {
+      font-family: "Georgia, serif";
+    }
+
+    h1 {
+      font-family: "Georgia, serif";
+    }
+
+    footer {
+      background-color: #222222;
+      color: white;
+      padding: 15px;
+    }
+  </style>
+
+</head>
+
+<body style="background-color: #178788;" ng-controller="newsController">
+
+  <div>
+    <img src="https://fanart.tv/fanart/tv/305074/tvbanner/my-hero-academia-5748231dbd831.jpg" alt="banner" style="width:1000px" class="center">
+  </div>
+
+  <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+         <a class="navbar-brand" href="HMHome.html"><img src="gameLogo.png" style="width: 70%;"></a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">News</a></li>
+          <li><a href="HMCalendar.html">Calendar</a></li>
+          <li><a href="HMSocialMedia.html">Social Media</a></li>
+        </ul>
+      </div>
+  </nav>
+  </div>
+
+  <p align="right" style="padding: 25px;">Filter list: <input ng-model="searchFor" size="30"/></p>
+
+    <div ng-repeat="article in articles | filter:searchFor | orderBy: '-date'"
+         class="recipe panel panel-default">
+    <div class="panel-heading"> {{ article.title }}</div>
+    <div class="panel-body">
+      {{ article.summary }}
+    </div>
+    <div class="panel-footer">{{ article.author }}</div>
+  </div>
+  <div style="clear: left"></div>
+
+<div class="myContainer">
+  <form class="col-md-6" style="border:thin solid black ">
+    <h3 class="mt-5">Add New Recipe</h3>
+
+    <div class="form-row mb-4">
+      <input type="text" placeholder="Article Title ..." ng-model="new_article.title" />
+      <input type="text" placeholder="Article Date ..." ng-model="new_article.date" style="margin:10 0 10 0;"/>
+      <input type="text" placeholder="Article Author ..." ng-model="new_article.author" />
+    </div>
+    <div class="row mt-4">
+      <textarea ng-model="new_article.summary" placeholder="Summary ..." rows='4' style="width : 100%"></textarea>
+      <button ng-click="addArticle(new_article)" type="button" class="btn btn-primary mt-5"> Save Recipe </button>
+
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+    // 1. create the module / app, make sure ng-app points to it.
+    var newsApp = angular.module('newsApp', []);
+    // 2. create the controller and give it $scope.
+    newsApp.controller("newsController", ['$scope', function($scope) {
+        $scope.new_article = { };
+        $scope.articles = [
+            { title: 'Pasta al Pesto',
+              date: '12/28/2018',
+              author: 'Bette Davis',
+              summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas sed. Id diam vel quam elementum pulvinar. A pellentesque sit amet porttitor. Orci sagittis eu volutpat odio facilisis mauris. Non arcu risus quis varius quam quisque id diam vel. Non arcu risus quis varius quam quisque id diam.' },
+            { title: 'Garlic Pork',
+              date: '12/5/2018',
+              author: 'Lawerence Oliver',
+              summary: 'A quick and simple meat dish for any Thai table.' },
+            { title: 'Garlic Broccoli',
+              date: '5/24/2019',
+              author: 'Carlos Carlos Carlos',
+              summary: 'Healthy and full of flavour, a simple dish.' },
+            { title: 'Black Pepper Beef',
+              date: '7/4/2019',
+              author: 'Cecil Baldwin',
+              summary: 'Delicious and rich in flavour. A Chinese classic.' }
+        ];
+		$scope.addArticle = function(article){
+			$scope.articles.push(article);
+			$scope.new_article = "";
+		}
+
+    }]);
+
+    function formatDate(date) {
+      var monthNames = [
+        "January", "February", "March",
+        "April", "May", "June", "July",
+        "August", "September", "October",
+        "November", "December"
+      ];
+
+      var day = date.getDate();
+      var monthIndex = date.getMonth();
+      var year = date.getFullYear();
+
+      return (monthIndex + 1) + '/' + day + '/' + year;
+    }
+
+    console.log(formatDate(new Date()));
+
+</script>
+
+<footer class="container-fluid text-center">
+  <p>© <strong>The Help Menu</strong></p>
+</footer>
+
+</body>
+
+</html>

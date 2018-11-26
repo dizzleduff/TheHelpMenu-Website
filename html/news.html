@@ -10,7 +10,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  <script type='text/javascript' src="angular.min.js"></script>
+  <script type='text/javascript' src="../js/angular.min.js"></script>
 
   <style>
 
@@ -28,7 +28,7 @@ color: white;
 
 .navbar-inverse .navbar-nav > li > a {
 color: #ffffff;
-font-family: Lato;
+font-family: "Georgia, serif";
 font-size: 1.7em;
 font-weight: 300;
 padding: 30px 25px 33px 25px;
@@ -72,15 +72,21 @@ height: 100%;
       margin: 50px;
     }
 
+    .panel-heading{
+      font-size: x-large;
+      font-family: "Georgia, serif";
+    }
+
+    .panel-body, .panel-footer {
+      font-size: medium;
+      font-family: "Georgia, serif";
+    }
+
     .myContainer {
 
     }
 
-    p {
-      font-family: "Georgia, serif";
-    }
-
-    h1 {
+    p, h1, h3, input, label, textarea, button {
       font-family: "Georgia, serif";
     }
 
@@ -108,7 +114,7 @@ height: 100%;
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="HMHome.html"><img src="gameLogo.png" style="width: 70%;"></a>
+        <a class="navbar-brand" href="index.html"><img src="../images/gameLogo.png" style="width: 70%;"></a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -126,26 +132,32 @@ height: 100%;
   <div ng-repeat="article in articles | filter:searchFor | orderBy: '-date'" class="recipe panel panel-default">
     <div class="panel-heading"> {{ article.title }}</div>
     <div class="panel-body">
-      {{ article.summary }}
+      <div class="row">
+        <div class="col-md-3"><img src="../images/{{article.image}}" style='max-height: 100%; max-width: 100%;'></img></div>
+        <div class="col-md-9">{{ article.summary }}</div>
+      </div>
     </div>
-    <div class="panel-footer">{{ article.author }}</div>
+    <div class="panel-footer">{{ article.date }}</div>
   </div>
   <div style="clear: left"></div>
 
   <input id="clickMe" type="button" value="clickme" onclick="showForm();" />
 
   <div class="myContainer" id="pressOnly">
-    <form class="col-md-6" style="border:#DDDDDD; margin: 25px; background-color: #F5F5F5; padding: 10px;">
-      <h3>Add New Recipe</h3>
+    <form class="col-md-6" ng-submit="addArticle(new_article)" style="border:#DDDDDD; margin: 25px; background-color: #F5F5F5; padding: 10px;">
+      <h3>Add New Article</h3>
 
       <div class="form-row">
-        <input type="text" placeholder="Article Title ..." ng-model="new_article.title" />
-        <input type="text" placeholder="Article Date ..." ng-model="new_article.date" />
-        <input type="text" placeholder="Article Author ..." ng-model="new_article.author" />
+        <input type="text" placeholder="Title" ng-model="new_article.title" />
+        <input type="text" placeholder="Author" ng-model="new_article.author" />
+        <input type="text" placeholder="YYYY/MM/DD" ng-model="new_article.date" pattern="^\d{4}[\-\/\s]?((((0[13578])|(1[02]))[\-\/\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\-\/\s]?(([0-2][0-9])|(30)))|(02[\-\/\s]?[0-2][0-9]))$" />
       </div>
       <hr>
-        <textarea ng-model="new_article.summary" placeholder="Summary ..." rows='4' style="width:100%" maxlength="400" minlength="10" required></textarea>
-        <button ng-click="addArticle(new_article)" type="submit" class="btn btn-primary mt-5">Save Recipe</button>
+      <label for="avatar">Choose a profile picture:</label>
+      <input type="file" id="avatar" name="avatar" id="imgUp" accept="image/png, image/jpeg" ng-model="new_article.image">
+      <hr>
+      <textarea ng-model="new_article.summary" placeholder="Summary ..." rows='4' style="width:100%" maxlength="400" minlength="10" required></textarea>
+      <button type="submit" class="btn btn-primary mt-5">Save Recipe</button>
     </form>
   </div>
 
@@ -157,43 +169,42 @@ height: 100%;
       $scope.new_article = {};
       $scope.articles = [{
           title: 'Pasta al Pesto',
-          date: '12/28/2018',
+          date: '2018/12/28',
           author: 'Bette Davis',
+          image: 'RDR2.jpg',
           summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas sed. Id diam vel quam elementum pulvinar. A pellentesque sit amet porttitor. Orci sagittis eu volutpat odio facilisis mauris. Non arcu risus quis varius quam quisque id diam vel. Non arcu risus quis varius quam quisque id diam.'
         },
         {
           title: 'Garlic Pork',
-          date: '12/5/2018',
+          date: '2018/12/05',
           author: 'Lawerence Oliver',
+          image: 'RDR2.jpg',
           summary: 'A quick and simple meat dish for any Thai table.'
         },
         {
           title: 'Garlic Broccoli',
-          date: '5/24/2019',
+          date: '2019/05/24',
           author: 'Carlos Carlos Carlos',
+          image: 'RDR2.jpg',
           summary: 'Healthy and full of flavour, a simple dish.'
         },
         {
           title: 'Black Pepper Beef',
-          date: '7/4/2019',
+          date: '2019/07/04',
           author: 'Cecil Baldwin',
+          image: 'RDR2.jpg',
           summary: 'Delicious and rich in flavour. A Chinese classic.'
         }
       ];
       $scope.addArticle = function(article) {
         $scope.articles.push(article);
         $scope.new_article = "";
+        return false;
       }
 
     }]);
 
     function formatDate(date) {
-      var monthNames = [
-        "January", "February", "March",
-        "April", "May", "June", "July",
-        "August", "September", "October",
-        "November", "December"
-      ];
 
       var day = date.getDate();
       var monthIndex = date.getMonth();
@@ -211,10 +222,15 @@ height: 100%;
     }
   </script>
 
+  <div style="clear:both;"></div>
+
   <footer class="container-fluid text-center">
     <p>© <strong>The Help Menu</strong></p>
   </footer>
 
 </body>
+
+</html>
+
 
 </html>

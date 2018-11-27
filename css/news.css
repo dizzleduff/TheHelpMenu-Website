@@ -12,7 +12,7 @@
 
 .navbar-inverse .navbar-nav>li>a {
   color: #ffffff;
-  font-family: Lato;
+  font-family: "Georgia, serif";
   font-size: 1.7em;
   font-weight: 300;
   padding: 30px 25px 33px 25px;
@@ -55,14 +55,66 @@
   margin: 50px;
 }
 
-.myContainer {}
-
-p {
+.panel-heading {
+  font-size: x-large;
   font-family: "Georgia, serif";
 }
 
-h1 {
+.panel-body, .panel-footer {
+  font-size: medium;
   font-family: "Georgia, serif";
+}
+
+.myContainer {}
+
+.form-check-label {
+  padding-right: 25px;
+}
+
+.form-group {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 15px;
+}
+
+p, h1, h3, input, label, textarea, button {
+  font-family: "Georgia, serif";
+}
+
+a:link {
+  color: #000000;
+  text-decoration: none
+}
+
+a:visited {
+  color: #000000;
+  text-decoration: none
+}
+
+a:hover {
+  color: #000000;
+  text-decoration: underline
+}
+
+a:active {
+  color: #000000;
+  text-decoration: none
+}
+
+.btn {
+  background-color: #222222;
+  border: none;
+  color: white;
+  margin: 10px;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+}
+
+.filter-box {
+  padding-left: 28px;
 }
 
 footer {

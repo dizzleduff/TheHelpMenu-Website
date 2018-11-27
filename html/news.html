@@ -6,123 +6,11 @@
   <title>The Help Menu</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/news.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
   <script type='text/javascript' src="../js/angular.min.js"></script>
-
-  <style>
-
-    .navbar, .navbar-inverse {
-border-radius: 0;
-border: none;
-margin-bottom: 0;
-min-height: 80px;
-}
-
-.nav li {
-display: inline;
-color: white;
-}
-
-.navbar-inverse .navbar-nav > li > a {
-color: #ffffff;
-font-family: "Georgia, serif";
-font-size: 1.7em;
-font-weight: 300;
-padding: 30px 25px 33px 25px;
-}
-
-.navbar-inverse .navbar-nav li a:hover {
-background-color: #444444;
-transition: 0.7s all linear;
-height: 100%;
-}
-
-.card {
-  margin: 15px;
-  padding: 15px;
-}
-
-    .responsive {
-      width:100%
-      height:auto;
-    }
-
-    .row {
-      display: flex;
-      justify-content: center;
-    }
-
-    .carousel-inner img {
-      width:780px;
-      height:440px;
-      margin: auto;
-    }
-
-    .center {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;
-    }
-
-    .panel {
-      margin: 50px;
-    }
-
-    .panel-heading{
-      font-size: x-large;
-      font-family: "Georgia, serif";
-    }
-
-    .panel-body, .panel-footer {
-      font-size: medium;
-      font-family: "Georgia, serif";
-    }
-
-    .myContainer {
-
-    }
-
-    .form-check-label {
-      padding-right: 25px;
-    }
-
-    .form-group {
-      margin-left: 10px;
-      margin-right: 10px;
-      margin-top: 15px;
-    }
-
-    p, h1, h3, input, label, textarea, button {
-      font-family: "Georgia, serif";
-    }
-
-    a:link { color: #000000; text-decoration: none}
-a:visited { color: #000000; text-decoration: none}
-a:hover { color: #000000; text-decoration: underline}
-a:active { color: #000000; text-decoration: none}
-
-    .btn {
-    background-color: #222222;
-    border: none;
-    color: white;
-    margin: 10px;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-}
-
-    footer {
-      background-color: #222222;
-      color: white;
-      padding: 15px;
-    }
-  </style>
 
 </head>
 
@@ -132,6 +20,7 @@ a:active { color: #000000; text-decoration: none}
     <img src="../images/banner.png" alt="banner" style="width:1000px" class="center">
   </div>
 
+  <!-- Nav Bar -->
   <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -151,8 +40,9 @@ a:active { color: #000000; text-decoration: none}
           <li><a href="socialMedia.html">Social Media</a></li>
         </ul>
       </div>
+    </div>
   </nav>
-  </div>
+
 
   <div class="row">
     <div class="col-md-6">
@@ -163,6 +53,14 @@ a:active { color: #000000; text-decoration: none}
     </div>
   </div>
 
+  <!-- Checkboxes -->
+  <div class="filter-box">
+    <input type="checkbox" ng-click="includeColour('Nintendo')" /> Nintendo
+    <input type="checkbox" ng-click="includeColour('PS4')" /> PS4
+    <input type="checkbox" ng-click="includeColour('Xbox')" /> Xbox
+  </div>
+
+  <!-- Login Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
 
@@ -175,7 +73,6 @@ a:active { color: #000000; text-decoration: none}
         </div>
         <div class="modal-body">
           <div class="container-fluid text-center">
-
             <form onsubmit="return showForm();">
               <div class="form-group">
                 <label for="nameInput">Username</label>
@@ -203,17 +100,15 @@ a:active { color: #000000; text-decoration: none}
                 </div>
               </div>
             </form>
-
           </div>
         </div>
-
       </div>
     </div>
-  </div>
+  </div> <!-- End Login Modal -->
 
+  <!-- Create Account Modal -->
   <div class="modal fade" id="myOtherModal" role="dialog">
     <div class="modal-dialog">
-
       <div class="modal-content">
         <div class="modal-header" style="background-color: #F5F5F5;">
           <button type="button" id="close" class="close" data-dismiss="modal">&times;</button>
@@ -223,7 +118,6 @@ a:active { color: #000000; text-decoration: none}
         </div>
         <div class="modal-body">
           <div class="container-fluid text-center">
-
             <form onsubmit="return closeSignupModal();">
               <div class="form-group">
                 <label for="nameInput">Username</label>
@@ -249,31 +143,27 @@ a:active { color: #000000; text-decoration: none}
                 </label>
               </div>
             </form>
-
           </div>
         </div>
-
       </div>
     </div>
-  </div>
+  </div> <!-- End Create Account Modal -->
 
-  <div ng-repeat="article in articles | filter:searchFor | orderBy: '-date'" class="recipe panel panel-default">
-<a href="{{article.link}}">
-    <div class="panel-heading"> {{ article.title }}</div>
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-md-3"><img src="../images/{{article.image}}" style='max-height: 100%; max-width: 100%;'></img></div>
-        <div class="col-md-9">{{ article.summary }}</div>
+  <!-- Display Article --> <!-- filter:consoleFilter | this should be used to filter through articles using consoleFilter function -->
+  <div ng-repeat="article in articles | filter:searchFor |  orderBy: '-date'" class="recipe panel panel-default">
+    <a href="{{article.link}}">
+      <div class="panel-heading"> {{ article.title }}</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-3"><img src="../images/{{article.image}}" style='max-height: 100%; max-width: 100%;'></img></div>
+          <div class="col-md-9">{{ article.summary }}</div>
+        </div>
       </div>
-    </div>
-    <div class="panel-footer">{{ article.author }} {{ article.date }}</div>
+      <div class="panel-footer">{{ article.author }} {{ article.date }}</div>
     </a>
   </div>
-  <div style="clear: left"></div>
 
-  <!--
-  <input id="clickMe" type="button" value="clickme" onclick="showForm();" />
--->
+  <div style="clear: left"></div>
 
   <div class="myContainer" id="pressOnly">
     <form class="col-md-8" ng-submit="addArticle(new_article)" style="border:#DDDDDD; margin: 50px; background-color: #F5F5F5; padding: 10px;">
@@ -285,29 +175,6 @@ a:active { color: #000000; text-decoration: none}
         <input type="text" placeholder="YYYY/MM/DD" ng-model="new_article.date" pattern="^\d{4}[\-\/\s]?((((0[13578])|(1[02]))[\-\/\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\-\/\s]?(([0-2][0-9])|(30)))|(02[\-\/\s]?[0-2][0-9]))$" />
       </div>
 
-      <!--
-      <div class="form-group">
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="dropdownCheck1">
-          <label class="form-check-label" for="dropdownCheck1">
-            PS4
-          </label>
-          <input type="checkbox" class="form-check-input" id="dropdownCheck2">
-          <label class="form-check-label" for="dropdownCheck2">
-            Xbox One
-          </label>
-          <input type="checkbox" class="form-check-input" id="dropdownCheck3">
-          <label class="form-check-label" for="dropdownCheck3">
-            PC
-          </label>
-          <input type="checkbox" class="form-check-input" id="dropdownCheck4">
-          <label class="form-check-label" for="dropdownCheck4">
-            Switch
-          </label>
-        </div>
-      </div>
--->
-
       <hr>
       <label for="avatar">Choose a profile picture:</label>
       <input type="file" id="avatar" name="avatar" id="imgUp" accept="image/png, image/jpeg" ng-model="new_article.image">
@@ -317,94 +184,7 @@ a:active { color: #000000; text-decoration: none}
     </form>
   </div>
 
-  <script type="text/javascript">
-    // 1. create the module / app, make sure ng-app points to it.
-    var newsApp = angular.module('newsApp', []);
-    // 2. create the controller and give it $scope.
-    newsApp.controller("newsController", ['$scope', function($scope) {
-      $scope.new_article = {};
-      $scope.articles = [{
-          title: 'Last of Us Part 2 New Gameplay Features',
-          date: '2018/11/23',
-          link: 'article1.html',
-          author: 'Kirk McKeand',
-          image: 'LOU2.jpeg',
-          summary: 'While no release data has been announced yet, but Naughty Dog and Sony were able to show fans some fresh gameplay (including in-game footage) at E3 2018 that has fans hyped up. Gamers should be ready to buy a PS4 to play Last of Us Part 2 as Ellie from the first game, with some gameplay mechanics new to the title that will really add to the survival horror feel of the game.'
-        },
-        {
-          title: 'Hope for Fallout 76 After Failure At Launch',
-          date: '2018/11/25',
-          link: 'article2.html',
-          author: 'Rob Thubron',
-          image: 'F76.jpeg',
-          summary: 'Any Fallout fan with a PS4, Xbox One, or PC gets hyped when a new game is announced. But what does Fallout 76 have in common with Aliens: Colonial Marines, Mafia 3, and No Man’s Sky? It’s one of those high-profile games that’s been universally panned by critics. But, like No Man’s Sky, could Bethesda’s title eventually receive enough patches and updates to make it worth playing?'
-        },
-        {
-          title: 'Recruit The Mage-Sister in the Upcoming Kirby Star Allies Update',
-          date: '2018/11/23',
-          link: 'article3.html',
-          author: 'Chris Carter',
-          image: 'KSA.jpeg',
-          summary: "This upcoming massive free update for Kirby Star Allies on the Nintendo Switch is presumed to be its last. It's going to be a doozy though, as it sports Susie, Taranza, Magolor, and all three Mage-Sisters -- the secondary antagonists of the game."
-        },
-        {
-          title: 'Pokémon: Let’s Go, Pikachu or Eevee?',
-          date: '2018/11/25',
-          link: 'article4.html',
-          author: 'Allegra Frank',
-          image: 'PLG.jpg',
-          summary: 'Nintendo Switch Pokémon: Let’s Go! deviates from Pokémon in some novel ways. But it’s still a Pokémon RPG, which means there are two versions to choose from. The question a Pokémon lover must ask themselves is less, “Should I play these games?” and more, “Which game should I play?” You may think this is subjective -and it mostly is- but there are solid reasons to pick one over the other.'
-        },
-        {
-          title: 'Red Dead Online Delayed Again',
-          date: '2018/11/25',
-          link: 'article5.html',
-          author: 'Tyler Fischer ',
-          image: 'RDR2.jpg',
-          summary: "Rockstar Games previously said that the Red Dead Online beta would arrive before the end of November. It's now November 25, and it's still nothing but crickets. As Rockstar seemingly runs out of time to launch the highly-anticipated Red Dead Redemption 2 mode, some Xbox One and PS4 players have apparently already gotten their hands on the beta, as Red Dead Redemption 2's Red Dead Online-specific achievements are currently being popped by a very small percentage of players."
-        }
-      ];
-      $scope.addArticle = function(article) {
-        $scope.articles.push(article);
-        $scope.new_article = "";
-        return false;
-      }
-
-    }]);
-
-    function formatDate(date) {
-
-      var day = date.getDate();
-      var monthIndex = date.getMonth();
-      var year = date.getFullYear();
-
-      return (monthIndex + 1) + '/' + day + '/' + year;
-    }
-
-    //console.log(formatDate(new Date()));
-
-    document.getElementById("pressOnly").style.visibility = "hidden";
-
-    var scrollingElement = (document.scrollingElement || document.body);
-
-    function showForm() {
-      document.getElementById("pressOnly").style.visibility = "visible";
-      $('#myModal').modal('hide');
-      $(scrollingElement).animate({
-        scrollTop: document.body.scrollHeight
-      }, 500);
-    }
-
-    function closeLoginModal() {
-      $('#myModal').modal('hide');
-      $('#myOtherModal').modal('show')
-    }
-
-    function closeSignupModal() {
-      $('#myOtherModal').modal('hide');
-      $('#myModal').modal('show')
-    }
-  </script>
+  <script src="../js/news.js"></script>
 
   <div style="clear:both;"></div>
 

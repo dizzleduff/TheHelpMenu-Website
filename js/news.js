@@ -50,6 +50,7 @@ newsApp.controller("newsController", ['$scope', function($scope) {
     }
   ];
 
+  // to find console for each article
   $scope.includeConsole = function(console) {
     var i = $.inArray(console, $scope.consoleIncludes);
     if (i > -1) {
@@ -59,6 +60,7 @@ newsApp.controller("newsController", ['$scope', function($scope) {
     }
   }
 
+  // filter through each article to find corresponding console
   $scope.consoleFilter = function(articles) {
     if ($scope.consoleIncludes.length > 0) {
       if ($.inArray(articles.console, $scope.consoleIncludes) < 0)

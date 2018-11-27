@@ -86,9 +86,31 @@ height: 100%;
 
     }
 
+    .form-check-label {
+      padding-right: 25px;
+    }
+
+    .form-group {
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 15px;
+    }
+
     p, h1, h3, input, label, textarea, button {
       font-family: "Georgia, serif";
     }
+
+    .btn {
+    background-color: #222222;
+    border: none;
+    color: white;
+    margin: 10px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+}
 
     footer {
       background-color: #222222;
@@ -102,7 +124,7 @@ height: 100%;
 <body style="background-color: #178788;" ng-controller="newsController">
 
   <div>
-    <img src="https://fanart.tv/fanart/tv/305074/tvbanner/my-hero-academia-5748231dbd831.jpg" alt="banner" style="width:1000px" class="center">
+    <img src="../images/banner.png" alt="banner" style="width:1000px" class="center">
   </div>
 
   <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -127,7 +149,108 @@ height: 100%;
   </nav>
   </div>
 
-  <p align="right" style="padding: 25px;">Filter list: <input ng-model="searchFor" size="30" /></p>
+  <div class="row">
+    <div class="col-md-6">
+      <p style="padding: 25px;" align="left"><input ng-model="searchFor" placeholder="Search" size="30" /></p>
+    </div>
+    <div class="col-md-6">
+      <p align="right"><button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#myModal">Reporter Login</button></p>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #F5F5F5;">
+          <button type="button" id="close" class="close" data-dismiss="modal">&times;</button>
+          <div class="container-fluid text-center">
+            <h3 class="modal-title">Login for Members of the Press</h3>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid text-center">
+
+            <form onsubmit="return showForm();">
+              <div class="form-group">
+                <label for="nameInput">Username</label>
+                <input type="name" class="form-control" id="nameInput" placeholder="Username" required>
+              </div>
+
+              <div class="form-group">
+                <label for="passInput">Password</label>
+                <input type="password" class="form-control" id="passInput" placeholder="Password" required>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-default">Login</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#myOtherModal" onclick="return closeLoginModal();">Sign Up</button>
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" checked="checked" name="remember"> Remember Me
+                </label>
+                <div class="form-group">
+                  <span class="psw"><a href="" onclick="return false;">
+                      <p>Forgot Password?</p>
+                    </a></span>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myOtherModal" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #F5F5F5;">
+          <button type="button" id="close" class="close" data-dismiss="modal">&times;</button>
+          <div class="container-fluid text-center">
+            <h3 class="modal-title">Create a HM Reporter Account</h3>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid text-center">
+
+            <form onsubmit="return closeSignupModal();">
+              <div class="form-group">
+                <label for="nameInput">Username</label>
+                <input type="name" class="form-control" id="nameInput" placeholder="Username" required>
+              </div>
+              <div class="form-group">
+                <label for="nameInput">Email</label>
+                <input type="email" class="form-control" id="emailInput" placeholder="Email" required>
+              </div>
+              <div class="form-group">
+                <label for="passInput">Password</label>
+                <input type="password" class="form-control" id="passInput" placeholder="Password" required>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#myOtherModal" onclick="return closeSignupModal();">Login</button>
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" required> I have read the Terms and Conditions of Use
+                </label>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <div ng-repeat="article in articles | filter:searchFor | orderBy: '-date'" class="recipe panel panel-default">
     <div class="panel-heading"> {{ article.title }}</div>
@@ -141,10 +264,12 @@ height: 100%;
   </div>
   <div style="clear: left"></div>
 
+  <!--
   <input id="clickMe" type="button" value="clickme" onclick="showForm();" />
+-->
 
   <div class="myContainer" id="pressOnly">
-    <form class="col-md-6" ng-submit="addArticle(new_article)" style="border:#DDDDDD; margin: 25px; background-color: #F5F5F5; padding: 10px;">
+    <form class="col-md-8" ng-submit="addArticle(new_article)" style="border:#DDDDDD; margin: 50px; background-color: #F5F5F5; padding: 10px;">
       <h3>Add New Article</h3>
 
       <div class="form-row">
@@ -152,6 +277,30 @@ height: 100%;
         <input type="text" placeholder="Author" ng-model="new_article.author" />
         <input type="text" placeholder="YYYY/MM/DD" ng-model="new_article.date" pattern="^\d{4}[\-\/\s]?((((0[13578])|(1[02]))[\-\/\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\-\/\s]?(([0-2][0-9])|(30)))|(02[\-\/\s]?[0-2][0-9]))$" />
       </div>
+
+      <!--
+      <div class="form-group">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="dropdownCheck1">
+          <label class="form-check-label" for="dropdownCheck1">
+            PS4
+          </label>
+          <input type="checkbox" class="form-check-input" id="dropdownCheck2">
+          <label class="form-check-label" for="dropdownCheck2">
+            Xbox One
+          </label>
+          <input type="checkbox" class="form-check-input" id="dropdownCheck3">
+          <label class="form-check-label" for="dropdownCheck3">
+            PC
+          </label>
+          <input type="checkbox" class="form-check-input" id="dropdownCheck4">
+          <label class="form-check-label" for="dropdownCheck4">
+            Switch
+          </label>
+        </div>
+      </div>
+-->
+
       <hr>
       <label for="avatar">Choose a profile picture:</label>
       <input type="file" id="avatar" name="avatar" id="imgUp" accept="image/png, image/jpeg" ng-model="new_article.image">
@@ -217,8 +366,24 @@ height: 100%;
 
     document.getElementById("pressOnly").style.visibility = "hidden";
 
+    var scrollingElement = (document.scrollingElement || document.body);
+
     function showForm() {
       document.getElementById("pressOnly").style.visibility = "visible";
+      $('#myModal').modal('hide');
+      $(scrollingElement).animate({
+        scrollTop: document.body.scrollHeight
+      }, 500);
+    }
+
+    function closeLoginModal() {
+      $('#myModal').modal('hide');
+      $('#myOtherModal').modal('show')
+    }
+
+    function closeSignupModal() {
+      $('#myOtherModal').modal('hide');
+      $('#myModal').modal('show')
     }
   </script>
 

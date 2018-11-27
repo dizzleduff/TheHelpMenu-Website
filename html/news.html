@@ -100,6 +100,11 @@ height: 100%;
       font-family: "Georgia, serif";
     }
 
+    a:link { color: #000000; text-decoration: none}
+a:visited { color: #000000; text-decoration: none}
+a:hover { color: #000000; text-decoration: underline}
+a:active { color: #000000; text-decoration: none}
+
     .btn {
     background-color: #222222;
     border: none;
@@ -253,6 +258,7 @@ height: 100%;
   </div>
 
   <div ng-repeat="article in articles | filter:searchFor | orderBy: '-date'" class="recipe panel panel-default">
+<a href="{{article.link}}">
     <div class="panel-heading"> {{ article.title }}</div>
     <div class="panel-body">
       <div class="row">
@@ -260,7 +266,8 @@ height: 100%;
         <div class="col-md-9">{{ article.summary }}</div>
       </div>
     </div>
-    <div class="panel-footer">{{ article.date }}</div>
+    <div class="panel-footer">{{ article.author }} {{ article.date }}</div>
+    </a>
   </div>
   <div style="clear: left"></div>
 
@@ -317,32 +324,44 @@ height: 100%;
     newsApp.controller("newsController", ['$scope', function($scope) {
       $scope.new_article = {};
       $scope.articles = [{
-          title: 'Pasta al Pesto',
-          date: '2018/12/28',
-          author: 'Bette Davis',
-          image: 'RDR2.jpg',
-          summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas sed. Id diam vel quam elementum pulvinar. A pellentesque sit amet porttitor. Orci sagittis eu volutpat odio facilisis mauris. Non arcu risus quis varius quam quisque id diam vel. Non arcu risus quis varius quam quisque id diam.'
+          title: 'Last of Us Part 2 New Gameplay Features',
+          date: '2018/11/23',
+          link: 'article1.html',
+          author: 'Kirk McKeand',
+          image: 'LOU2.jpeg',
+          summary: 'While no release data has been announced yet, but Naughty Dog and Sony were able to show fans some fresh gameplay (including in-game footage) at E3 2018 that has fans hyped up. Gamers should be ready to buy a PS4 to play Last of Us Part 2 as Ellie from the first game, with some gameplay mechanics new to the title that will really add to the survival horror feel of the game.'
         },
         {
-          title: 'Garlic Pork',
-          date: '2018/12/05',
-          author: 'Lawerence Oliver',
-          image: 'RDR2.jpg',
-          summary: 'A quick and simple meat dish for any Thai table.'
+          title: 'Hope for Fallout 76 After Failure At Launch',
+          date: '2018/11/25',
+          link: 'article2.html',
+          author: 'Rob Thubron',
+          image: 'F76.jpeg',
+          summary: 'Any Fallout fan with a PS4, Xbox One, or PC gets hyped when a new game is announced. But what does Fallout 76 have in common with Aliens: Colonial Marines, Mafia 3, and No Man’s Sky? It’s one of those high-profile games that’s been universally panned by critics. But, like No Man’s Sky, could Bethesda’s title eventually receive enough patches and updates to make it worth playing?'
         },
         {
-          title: 'Garlic Broccoli',
-          date: '2019/05/24',
-          author: 'Carlos Carlos Carlos',
-          image: 'RDR2.jpg',
-          summary: 'Healthy and full of flavour, a simple dish.'
+          title: 'Recruit The Mage-Sister in the Upcoming Kirby Star Allies Update',
+          date: '2018/11/23',
+          link: 'article3.html',
+          author: 'Chris Carter',
+          image: 'KSA.jpeg',
+          summary: "This upcoming massive free update for Kirby Star Allies on the Nintendo Switch is presumed to be its last. It's going to be a doozy though, as it sports Susie, Taranza, Magolor, and all three Mage-Sisters -- the secondary antagonists of the game."
         },
         {
-          title: 'Black Pepper Beef',
-          date: '2019/07/04',
-          author: 'Cecil Baldwin',
+          title: 'Pokémon: Let’s Go, Pikachu or Eevee?',
+          date: '2018/11/25',
+          link: 'article4.html',
+          author: 'Allegra Frank',
+          image: 'PLG.jpg',
+          summary: 'Nintendo Switch Pokémon: Let’s Go! deviates from Pokémon in some novel ways. But it’s still a Pokémon RPG, which means there are two versions to choose from. The question a Pokémon lover must ask themselves is less, “Should I play these games?” and more, “Which game should I play?” You may think this is subjective -and it mostly is- but there are solid reasons to pick one over the other.'
+        },
+        {
+          title: 'Red Dead Online Delayed Again',
+          date: '2018/11/25',
+          link: 'article5.html',
+          author: 'Tyler Fischer ',
           image: 'RDR2.jpg',
-          summary: 'Delicious and rich in flavour. A Chinese classic.'
+          summary: "Rockstar Games previously said that the Red Dead Online beta would arrive before the end of November. It's now November 25, and it's still nothing but crickets. As Rockstar seemingly runs out of time to launch the highly-anticipated Red Dead Redemption 2 mode, some Xbox One and PS4 players have apparently already gotten their hands on the beta, as Red Dead Redemption 2's Red Dead Online-specific achievements are currently being popped by a very small percentage of players."
         }
       ];
       $scope.addArticle = function(article) {

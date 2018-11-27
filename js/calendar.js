@@ -11,45 +11,38 @@ $(function() {
     navLinks: true, // can click day/week names to navigate views
     editable: true,
     eventLimit: true, // allow "more" link when too many events
-    // events: [{
-    //     title: 'First Day of Fall Semester',
-    //     start: '2018-08-27'
-    //   },
-    //   {
-    //     title: 'Mile Test',
-    //     start: '2018-09-05T12:30:00',
-    //     end: '2018-09-05T13:30:00'
-    //   },
-    //   {
-    //     title: 'Team Hero Practice',
-    //     start: '2018-09-05T14:30:00',
-    //     end: '2018-09-05T16:30:00'
-    //   },
-    //   {
-    //     title: 'UA Sports Festival',
-    //     start: '2018-10-11',
-    //   },
-    //   {
-    //     title: 'Trip to Hero Museum',
-    //     start: '2018-10-16',
-    //   },
-    //   {
-    //     title: 'Presentation',
-    //     start: '2018-10-20T12:00:00',
-    //   },
-    //   {
-    //     title: 'Self Training',
-    //     start: '2018-10-20T16:00:00',
-    //   },
-    //   {
-    //     title: 'Internship',
-    //     start: '2018-10-22',
-    //     end: '2018-10-27'
-    //   },
-    //   {
-    //     title: 'Last Day of Fall Semester',
-    //     start: '2018-11-16',
-    //   },
-    // ]
+    events: [{
+        title: 'Hollow Knight Remastered',
+        start: '2018-11-27'
+      },
+      {
+        title: 'Super Smash Bros Ultimate',
+        start: '2018-12-07'
+      },
+      {
+        title: 'ARK Survival',
+        start: '2018-12-10'
+      },
+      {
+        title: 'Resident Evil 8',
+        start: '2018-12-15',
+      },
+      {
+        title: 'Red Dead 3',
+        start: '2018-12-22'
+      },
+      {
+        title: 'War Thunder',
+        start: '2018-12-26'
+      },
+      {
+        title: 'Mario Party 10',
+        start: '2018-12-29'
+      },
+      {
+        title: 'Benders Universe',
+        start: '2018-12-31',
+      },
+    ]
   });
 });

@@ -69,6 +69,8 @@
 
 .form-check-label {
   padding-right: 25px;
+  font-family: "Georgia, serif";
+  color: white;
 }
 
 .form-group {
@@ -81,27 +83,17 @@ p, h1, h3, input, label, textarea, button {
   font-family: "Georgia, serif";
 }
 
-a:link {
-  color: #000000;
-  text-decoration: none
+.modal-title {
+  font-family: "Georgia, serif";
 }
 
-a:visited {
-  color: #000000;
-  text-decoration: none
-}
-
-a:hover {
-  color: #000000;
-  text-decoration: underline
-}
-
-a:active {
-  color: #000000;
-  text-decoration: none
-}
+a:link { color: #000000; text-decoration: none}
+a:visited { color: #000000; text-decoration: none}
+a:hover { color: #000000; text-decoration: underline}
+a:active { color: #000000; text-decoration: none}
 
 .btn {
+  font-family: "Georgia, serif";
   background-color: #222222;
   border: none;
   color: white;
@@ -114,7 +106,8 @@ a:active {
 }
 
 .filter-box {
-  padding-left: 28px;
+  margin-left: 30px;
+  margin-right: 10px;
 }
 
 footer {

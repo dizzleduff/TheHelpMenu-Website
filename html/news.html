@@ -49,16 +49,31 @@
       <p style="padding: 25px;" align="left"><input ng-model="searchFor" placeholder="Search" size="30" /></p>
     </div>
     <div class="col-md-6">
-      <p align="right"><button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#myModal">Reporter Login</button></p>
+      <p style="padding-right: 25px; padding-top: 15px;" align="right"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Reporter Login</button></p>
     </div>
   </div>
 
   <!-- Checkboxes -->
   <div class="filter-box">
-    <input type="checkbox" ng-click="includeColour('Nintendo')" /> Nintendo
-    <input type="checkbox" ng-click="includeColour('PS4')" /> PS4
-    <input type="checkbox" ng-click="includeColour('Xbox')" /> Xbox
-  </div>
+           <div class="form-check">
+             <input type="checkbox" class="form-check-input" id="dropdownCheck1">
+             <label class="form-check-label" for="dropdownCheck1">
+               PS4
+             </label>
+             <input type="checkbox" class="form-check-input" id="dropdownCheck2">
+             <label class="form-check-label" for="dropdownCheck2">
+               Xbox One
+             </label>
+             <input type="checkbox" class="form-check-input" id="dropdownCheck3">
+             <label class="form-check-label" for="dropdownCheck3">
+               PC
+             </label>
+             <input type="checkbox" class="form-check-input" id="dropdownCheck4">
+             <label class="form-check-label" for="dropdownCheck4">
+               Switch
+             </label>
+           </div>
+         </div>
 
   <!-- Login Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -180,7 +195,7 @@
       <input type="file" id="avatar" name="avatar" id="imgUp" accept="image/png, image/jpeg" ng-model="new_article.image">
       <hr>
       <textarea ng-model="new_article.summary" placeholder="Summary ..." rows='4' style="width:100%" maxlength="400" minlength="10" required></textarea>
-      <button type="submit" class="btn btn-primary mt-5">Publish Article</button>
+      <button type="submit" class="btn btn-default">Publish Article</button>
     </form>
   </div>
 

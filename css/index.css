@@ -30,7 +30,7 @@ padding: 15px;
 }
 
 .responsive {
-  width:100%
+  width:100%;
   height:auto;
 }
 
@@ -62,8 +62,13 @@ h1 {
   color: white;
 }
 
-footer {
+.footer {
   background-color: #222222;
   color: white;
   padding: 15px;
+  position:fixed;
+    left: 0;
+    right: 0;
+  bottom: 0;
+  text-align: center;
 }
